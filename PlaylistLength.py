@@ -1,3 +1,3 @@
-if __name__ == "main":
+if __name__ == "__main__":
     playlist = input("Please input the playlist url: ")
     print(playlist)
