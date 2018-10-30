@@ -53,7 +53,6 @@ def print_time(seconds):
 
 if __name__ == "__main__":
     playlistId = input("Please input the playlist url: ")
-    print(playlistId)
 
     playlist = get_playlist_info(playlistId)
     vid_ids = get_video_ids(playlist)
