@@ -10,6 +10,9 @@ API_VERSION = 'v3'
 API_KEY = "AIzaSyCglRrhkgaiC6b3Bc6oW9Zb9XEVMbR2Yro"
 youtube = build(API_SERVICE_NAME, API_VERSION, developerKey=API_KEY)
 
+HOUR = 3600
+MINUTE = 60
+
 
 def get_playlist_info(playlist_id):
     # playlist info
@@ -23,12 +26,12 @@ def get_video_info(ids):
     vid_input = ','.join(ids)
     return youtube.videos().list(id=vid_input, part='contentDetails').execute()
 
+
 def calculate_playlist_length(ids):
     video_response = get_video_info(ids)
     length = 0
     for video in video_response['items']:
         time = isodate.parse_duration(video['contentDetails']['duration'])
-        print(video['contentDetails']['duration'])
         length += time.total_seconds()
     return length
 
@@ -40,6 +43,14 @@ def get_video_ids(playlist_info):
     return vids
 
 
+def print_time(seconds):
+    hours = seconds // HOUR
+    seconds = seconds % HOUR
+    minutes = seconds // MINUTE
+    seconds = seconds % 60
+    print("HOURS: " + str(hours) + " MINUTES: " + str(minutes) + " SECONDS: " + str(seconds))
+
+
 if __name__ == "__main__":
     playlistId = input("Please input the playlist url: ")
     print(playlistId)
@@ -47,3 +58,4 @@ if __name__ == "__main__":
     playlist = get_playlist_info(playlistId)
     vid_ids = get_video_ids(playlist)
     length = calculate_playlist_length(vid_ids)
+    print_time(length)
