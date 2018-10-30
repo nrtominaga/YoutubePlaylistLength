@@ -40,7 +40,7 @@ def get_authenticated_service():
 #     print(response)
 
 
-def playlist_items_list_by_playlist_id(client, **kwargs):
+def call_youtube_playlist_item_api(client, **kwargs):
     # See full sample for function
     # kwargs = remove_empty_kwargs(**kwargs)
 
@@ -56,7 +56,15 @@ def get_playlist_info(playlist_id, client):
     # API_ENDPOINT = "https://www.googleapis.com/youtube/v3/playlistItems?part=" + part + "&maxResults=" + str(max_results) + "&playlistId=" + playlist_id + "&key=" + API_KEY
     # r = requests.post(url=API_ENDPOINT)
     # print(r.text)
-    return playlist_items_list_by_playlist_id(client, part=part, maxResults=max_results, playlistId=playlist_id)
+    return call_youtube_playlist_item_api(client, part=part, maxResults=max_results, playlistId=playlist_id)
+
+
+def get_video_info():
+    print("hi")
+
+
+def get_playlist_length(playlistInfo, client):
+    print("what")
 
 
 if __name__ == "__main__":
@@ -67,4 +75,3 @@ if __name__ == "__main__":
 
     client = get_authenticated_service()
     playlist = get_playlist_info(playlistId, client)
-    print(playlist)
