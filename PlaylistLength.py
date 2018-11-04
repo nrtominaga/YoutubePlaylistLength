@@ -8,7 +8,7 @@ from googleapiclient.errors import HttpError
 API_SERVICE_NAME = 'youtube'
 API_VERSION = 'v3'
 API_KEY = "AIzaSyCglRrhkgaiC6b3Bc6oW9Zb9XEVMbR2Yro"
-youtube = build(API_SERVICE_NAME, API_VERSION, developerKey=API_KEY)
+YOUTUBE = build(API_SERVICE_NAME, API_VERSION, developerKey=API_KEY)
 
 HOUR = 3600
 MINUTE = 60
@@ -18,13 +18,13 @@ def get_playlist_info(playlist_id):
     # playlist info
     part = "contentDetails"
     max_results = 50
-    playlist_response = youtube.playlistItems().list(part=part, maxResults=max_results, playlistId=playlist_id).execute()
+    playlist_response = YOUTUBE.playlistItems().list(part=part, maxResults=max_results, playlistId=playlist_id).execute()
     return playlist_response
 
 
 def get_video_info(ids):
     vid_input = ','.join(ids)
-    return youtube.videos().list(id=vid_input, part='contentDetails').execute()
+    return YOUTUBE.videos().list(id=vid_input, part='contentDetails').execute()
 
 
 def calculate_playlist_length(ids):
