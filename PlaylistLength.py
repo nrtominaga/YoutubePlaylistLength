@@ -52,9 +52,16 @@ def print_time(seconds):
 
 
 if __name__ == "__main__":
-    playlistId = input("Please input the playlist url: ")
-
-    playlist = get_playlist_info(playlistId)
-    vid_ids = get_video_ids(playlist)
-    length = calculate_playlist_length(vid_ids)
-    print_time(length)
+    playlistId = ""
+    total_length = 0
+    while True:
+        playlistId = input("Please input the playlist url: ")
+        if playlistId == "stop":
+            break
+        playlist = get_playlist_info(playlistId)
+        vid_ids = get_video_ids(playlist)
+        length = calculate_playlist_length(vid_ids)
+        total_length += length
+        print_time(length)
+    print("Total Time Is: ")
+    print_time(total_length)
