@@ -5,16 +5,13 @@ import json
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-# your API key here
-API_SERVICE_NAME = 'youtube'
-API_VERSION = 'v3'
-API_KEY = ""
-with open('KEY.json') as json_file:
-    API_KEY = json.load(json_file)['API_KEY']
-YOUTUBE = build(API_SERVICE_NAME, API_VERSION, developerKey=API_KEY)
-
 HOUR = 3600
 MINUTE = 60
+
+
+def load_api_key(file):
+    with open(file) as json_file:
+        return json.load(json_file)['API_KEY']
 
 
 def get_playlist_info(playlist_id):
@@ -52,6 +49,13 @@ def print_time(seconds):
     minutes = seconds // MINUTE
     seconds = seconds % 60
     print("HOURS: " + str(hours) + " MINUTES: " + str(minutes) + " SECONDS: " + str(seconds))
+
+
+# your API key here
+API_SERVICE_NAME = 'youtube'
+API_VERSION = 'v3'
+API_KEY = load_api_key('KEY.json')
+YOUTUBE = build(API_SERVICE_NAME, API_VERSION, developerKey=API_KEY)
 
 
 if __name__ == "__main__":
