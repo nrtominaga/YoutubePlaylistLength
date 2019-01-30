@@ -1,5 +1,6 @@
 import argparse
 import isodate
+import json
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -7,7 +8,9 @@ from googleapiclient.errors import HttpError
 # your API key here
 API_SERVICE_NAME = 'youtube'
 API_VERSION = 'v3'
-API_KEY = "AIzaSyCglRrhkgaiC6b3Bc6oW9Zb9XEVMbR2Yro"
+API_KEY = ""
+with open('KEY.json') as json_file:
+    API_KEY = json.load(json_file)['API_KEY']
 YOUTUBE = build(API_SERVICE_NAME, API_VERSION, developerKey=API_KEY)
 
 HOUR = 3600
